@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>Be My Valentine?</title>
+    <style>
+        /* CSS để căn giữa mọi thứ và làm đẹp */
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Chiều cao full màn hình */
+            background-color: #fce4ec; /* Màu hồng nhạt */
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden; /* Tránh thanh cuộn khi nút to ra */
+        }
+
+        .gif-container img {
+            max-width: 100%;
+            height: 200px; /* Cố định chiều cao ảnh để không bị vỡ layout trên đt */
+            object-fit: contain;
+        }
+
+        h1 {
+            color: #d81b60;
+            text-align: center;
+            font-size: 24px;
+            margin: 20px 0;
+        }
+
+        .buttons {
+            display: flex;
+            flex-wrap: wrap; /* Cho phép xuống dòng nếu nút quá to */
+            justify-content: center;
+            gap: 20px;
+            align-items: center;
+        }
+
+        button {
+            padding: 10px 20px;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease; /* Hiệu ứng mượt */
+        }
+
+        #yesBtn {
+            background-color: #4caf50; /* Màu xanh lá */
+            color: white;
+            font-size: 16px; /* Kích thước chữ ban đầu */
+        }
+
+        #noBtn {
+            background-color: #f44336; /* Màu đỏ */
+            color: white;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="gif-container">
+        <img id="gif" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExODMaM3lzM3lzM3lzM3lzM3lzM3lzM3lzM3lz/lz2S2J2J2J2J2J/giphy.gif" alt="Cute bear">
+    </div>
+
+    <h1 id="question">Làm Valentine của tớ nha? 🌹</h1>
+
+    <div class="buttons">
+        <button id="yesBtn" onclick="accept()">Yes</button>
+        <button id="noBtn" onclick="deny()">No</button>
+    </div>
+
+    <script>
+        // JAVASCRIPT - Phần xử lý logic
+        
+        let yesBtnSize = 16; // Kích thước chữ hiện tại của nút Yes
+        const messages = ["Không á?", "Chắc chưa?", "Năn nỉ đó...", "Thôi mà...", "Bấm Yes đi!", "Đừng mà :("];
+        let messageIndex = 0;
+
+        function deny() {
+            // 1. Tăng kích thước nút Yes
+            yesBtnSize += 10; 
+            document.getElementById("yesBtn").style.fontSize = yesBtnSize + "px";
+
+            // 2. Thay đổi nội dung nút No
+            const noBtn = document.getElementById("noBtn");
+            noBtn.innerText = messages[messageIndex];
+            
+            // Logic vòng lặp để đổi câu thoại (giống linked list vòng tròn :D)
+            messageIndex = (messageIndex + 1) % messages.length;
+        }
+
+        function accept() {
+            // Khi chọn Yes -> Thay đổi toàn bộ giao diện
+            document.getElementById("question").innerText = "Yayyy! Tớ biết mà! ❤️";
+            document.getElementById("gif").src = "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExODMaM3lzM3lzM3lzM3lzM3lzM3lzM3lzM3lz/T86i6yDyOYz7J6v9/giphy.gif"; // Ảnh ăn mừng
+            
+            // Ẩn 2 nút đi
+            document.querySelector(".buttons").style.display = "none";
+        }
+    </script>
+</body>
+</html>
